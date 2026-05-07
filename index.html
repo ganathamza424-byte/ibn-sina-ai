@@ -64,15 +64,12 @@
         }
 
         .input-area {
-            width: 55%; 
-            display: flex;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 35px;
-            padding: 8px 25px;
-            border: 1px solid #f1c40f;
-            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
-        }
+            <div class="input-area">
+    <label style="display: flex; width: 100%; align-items: center;">
+        <input type="text" id="userInput" placeholder="تحدث مع ابن سينا..." onkeypress="handleKeyPress(event)">
+        <button class="send-btn" onclick="sendToAI()" type="button">⏎</button>
+    </label>
+</div>
 
         input {
             background: transparent;
@@ -130,7 +127,7 @@
 
 <script>
     // ضع مفتاح الـ API الخاص بك هنا ليعمل الموقع بدون جهازك
-    const API_KEY = "AIzaSyCMUm8Hx6v5dcL49p_cl3Dpcmkzh7bETig"; 
+    const API_KEY = "ضغ_مفتاح_API_الخاص_بك_هنا"; 
 
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
@@ -178,7 +175,7 @@
 
         } catch (error) {
             loader.style.display = 'none';
-            aiMsgDiv.innerText = "حدث خطأ في الاتصال بالسيرفر ";
+            aiMsgDiv.innerText = "حدث خطأ في الاتصال بالسيرفر العالمي. تأكد من مفتاح الـ API.";
         }
     }
 
