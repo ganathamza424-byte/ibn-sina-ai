@@ -6,6 +6,7 @@
     <title>الفيلسوف الرقمي - ابن سينا</title>
     <style>
         body {
+            /* تأكد أن صورة الخلفية في جيت هاب اسمها bg.jpg */
             background: #0d1117 url('bg.jpg') no-repeat center center fixed;
             background-size: cover;
             margin: 0;
@@ -53,13 +54,14 @@
         }
 
         .input-area {
-            width: 70%; /* كبرناها شوية عشان تبقى أوضح */
+            width: 55%; 
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 35px;
             padding: 8px 25px;
-            border: 2px solid #f1c40f;
+            border: 1px solid #f1c40f;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
         }
 
         input {
@@ -78,6 +80,7 @@
             cursor: pointer;
             color: #f1c40f;
             font-size: 1.8rem;
+            margin-right: 10px;
         }
 
         .disclaimer {
@@ -85,9 +88,13 @@
             font-size: 12px;
             margin-top: 10px;
             text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
-        .loader { display: none; color: #f1c40f; margin-bottom: 10px; font-weight: bold; }
+        #chat-window::-webkit-scrollbar { width: 6px; }
+        #chat-window::-webkit-scrollbar-thumb { background: #f1c40f; border-radius: 10px; }
+
+        .loader { display: none; color: #f1c40f; text-align: center; margin-bottom: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -106,7 +113,7 @@
 </div>
 
 <script>
-    // حط الـ API Key بتاعك هنا يا حمزة بين القوسين
+    // تم وضع المفتاح الخاص بك هنا بنجاح
     const API_KEY = "AIzaSyCMUm8Hx6v5dcL49p_cl3Dpcmkzh7bETig"; 
 
     async function sendToAI() {
@@ -130,7 +137,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: "أنت ابن سينا، مساعد ذكي ومباشر. رد بالعربية. سؤال المستخدم: " + prompt }] }]
+                    contents: [{ parts: [{ text: "أنت ابن سينا، فيلسوف وطبيب عبقري، تتحدث بالعربية الفصحى بأسلوب ذكي ومختصر. سؤال المستخدم: " + prompt }] }]
                 })
             });
 
@@ -140,11 +147,11 @@
             if (data.candidates && data.candidates[0].content.parts[0].text) {
                 aiMsgDiv.innerText = data.candidates[0].content.parts[0].text;
             } else {
-                aiMsgDiv.innerText = "حدث خطأ في المفتاح أو السيرفر. تأكد من الـ API Key.";
+                aiMsgDiv.innerText = "حدث خطأ في الرد، تأكد من إعدادات الـ API Key في Google Cloud.";
             }
         } catch (error) {
             loader.style.display = 'none';
-            aiMsgDiv.innerText = "تأكد من اتصالك بالإنترنت ومفتاح الـ API.";
+            aiMsgDiv.innerText = "حدث خطأ في الاتصال بالسيرفر.";
         }
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
